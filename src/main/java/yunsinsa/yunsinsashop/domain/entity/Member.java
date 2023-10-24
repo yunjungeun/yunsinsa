@@ -17,4 +17,10 @@ public class Member {
 
     @Column(name = "member_name", columnDefinition = "회원 이름")
     private String name;
+
+    @Column(name = "email", columnDefinition =  "회원 이메일")
+    private String email;
+
+    @Column(name="password", columnDefinition = "비밀번호")
+    private String password;
 }
