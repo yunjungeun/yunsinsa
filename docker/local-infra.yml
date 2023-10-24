@@ -1,0 +1,28 @@
+# Connect to MySQL
+# mysql -u root -p1234
+# Create User and Grant Privileges
+# use mysql
+# select host, user from user
+# create user yun@‘%’ identified by '1234';
+# GRANT ALL PRIVILEGES ON yun.* TO 'yun'@'%' WITH GRANT OPTION;
+# FLUSH PRIVILEGES;
+version: '3.9'
+services:
+  rds:
+    image: mysql:8.0
+    container_name: yunshinshop-rds
+    restart: always
+    ports:
+      - "3306:3306"
+#    volumes: # Mount - container:/docker-entrypoint-initdb.d
+#      - ./local-rds-init.sql:/docker-entrypoint-initdb.d/local-rds-init.sql
+    environment:
+      MYSQL_DATABASE: yunshinshop
+      MYSQL_USER: yunshinshop
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      TZ: UTC
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
