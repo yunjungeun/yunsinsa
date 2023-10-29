@@ -14,8 +14,8 @@ services:
     restart: always
     ports:
       - "3306:3306"
-#    volumes: # Mount - container:/docker-entrypoint-initdb.d
-#      - ./local-rds-init.sql:/docker-entrypoint-initdb.d/local-rds-init.sql
+    volumes: # Mount - container:/docker-entrypoint-initdb.d
+      - ./local-rds-init.sql:/docker-entrypoint-initdb.d/local-rds-init.sql
     environment:
       MYSQL_DATABASE: yunshinshop
       MYSQL_USER: yunshinshop
