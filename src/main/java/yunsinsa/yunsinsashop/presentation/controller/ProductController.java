@@ -8,7 +8,7 @@ import yunsinsa.yunsinsashop.domain.service.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
@@ -37,10 +37,10 @@ public class ProductController {
     }
 
     // 상품 수정
-    @PutMapping("/{id}")
+   /* @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.updateProduct(id, product);
-    }
+        return productService.updateProduct(id, product); //현재 업뎃 서비스 수정중!!!
+    }*/
 
     // 상품 삭제
     @DeleteMapping("/{id}")

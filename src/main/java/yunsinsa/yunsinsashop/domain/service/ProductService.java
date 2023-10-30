@@ -35,16 +35,17 @@ public class ProductService {
     }
 
     // 상품 수정
-    public Product updateProduct(Long id, Product product) {
-        Product existingProduct = getProduct(id);
-        existingProduct.setName(product.getName());
-        existingProduct.setDescription(product.getDescription());
-        existingProduct.setCategory(product.getCategory());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setStock(product.getStock());
+   /* public Product updateProduct(Long id, Product product) {
+        Product existingProduct = getProduct(id);  // 기존 엔티티 불러오기
+        existingProduct.setName(product.getName());  //이름 업데이트
+        existingProduct.setDescription(product.getDescription());   //설명 업뎃
+        existingProduct.setCategory(product.getCategory());  // 카테고리 업뎃
+        existingProduct.setPrice(product.getPrice());  //가격 업뎃
+        existingProduct.setStock(product.getStock());   //재고 업뎃
 
-        return productRepository.save(existingProduct);
-    }
+        return productRepository.save(existingProduct);  // 업뎃한거 저장
+        }
+    */
 
     // 상품 삭제
     public void deleteProduct(Long id) {

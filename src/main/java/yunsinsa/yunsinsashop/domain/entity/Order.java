@@ -37,7 +37,7 @@ public class Order extends BaseEntity {
 
     @Column(name = "order_status", length = 20)
     @Enumerated(value = EnumType.STRING) // db에서 인덱스넘버 0.1.2 로 나타남 -> String 으로 바꿈(CREATED,PROGRESS,COMPLETED)
-    private OrderStatus orderStatus;
+    private OrderStatus orderStatus;  //주문상태
 
     // 연관관계 편의 메서드
 //    public void changeMember(Member newMember) {

@@ -36,7 +36,7 @@ public class Payment extends BaseEntity {
     @Column(name = "transaction_id", unique = true, length = 100)
     private String transactionId;
 
-    @Column(name = "payment_status", length = 20)
+    @Column(name = "payment_status", length = 20) // 결제상태
     @Enumerated(value = EnumType.STRING)
     private PaymentStatus paymentStatus;
 
