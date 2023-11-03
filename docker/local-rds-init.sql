@@ -7,7 +7,7 @@ CREATE TABLE tb_product (
     stock INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_by VARCHAR(255),
+    created_by VARCHAR(255) NOT NULL,
     updated_by VARCHAR(255)
 );
 
@@ -16,18 +16,18 @@ CREATE TABLE tb_category (
     category_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_by VARCHAR(255),
+    created_by VARCHAR(255) NOT NULL,
     updated_by VARCHAR(255)
 );
 
-CREATE TABLE yunshinshop.tb_member (
+CREATE TABLE tb_member (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     member_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_by VARCHAR(255),
+    created_by VARCHAR(255) NOT NULL,
     updated_by VARCHAR(255)
  );
 
@@ -35,12 +35,12 @@ CREATE TABLE yunshinshop.tb_member (
      order_id INT AUTO_INCREMENT PRIMARY KEY,
      customer_id INT,
      order_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     adress VARCHAR(255) not null,
+     address VARCHAR(255) not null,
+     payment_status VARCHAR(20),
      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-     created_by VARCHAR(255),
-     updated_by VARCHAR(255),
-     payment_status VARCHAR(20)
+     created_by VARCHAR(255) NOT NULL,
+     updated_by VARCHAR(255)
  );
 
 CREATE TABLE tb_order_detail (
@@ -51,7 +51,7 @@ CREATE TABLE tb_order_detail (
     price int NOT NULl,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_by VARCHAR(255),
+    created_by VARCHAR(255) NOT NULL,
     updated_by VARCHAR(255)
 );
 
@@ -60,12 +60,12 @@ CREATE TABLE tb_payment (
     order_id INT NOT NULl,
     payment_at DATE NOT NUlL,
     amount int NOT NULL,
-    payment_method VARCHAR(50) NOT NUlL,
+    payment_method VARCHAR(20) NOT NUlL,
     transaction_id VARCHAR(100) UNIQUE,
+    payment_status VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    created_by VARCHAR(255),
-    updated_by VARCHAR(255),
-    payment_status VARCHAR(20)
+    created_by VARCHAR(255) NOT NULL,
+    updated_by VARCHAR(255)
 );
 

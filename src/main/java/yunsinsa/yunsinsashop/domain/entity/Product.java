@@ -1,10 +1,9 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Getter
 @Table(name = "tb_product")
@@ -29,4 +28,22 @@ public class Product extends BaseEntity {
 
     @Column(name="stock", nullable = false)
     private int stock;
+
+    @Builder
+    public Product(Long id, String name, String description, Category category, int price, int stock) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public void change(String name, String description, Category category, int price, int stock) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
 }
