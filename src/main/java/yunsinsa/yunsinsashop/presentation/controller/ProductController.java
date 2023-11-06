@@ -1,8 +1,6 @@
 package yunsinsa.yunsinsashop.presentation.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import yunsinsa.yunsinsashop.domain.entity.Product;
 import yunsinsa.yunsinsashop.domain.service.ProductService;
@@ -24,13 +22,13 @@ public class ProductController {
 
     // 상품 등록
     @PostMapping
-    public Product createProduct(@RequestBody ProductDto.CreateRequest request) {
+    public ProductDto.CreateResponse createProduct(@RequestBody ProductDto.CreateRequest request) {
         return productService.createProduct(request);
     }
 
     // 상품 조회
     @GetMapping("/{id}")
-    public Product findProduct(@PathVariable Long id) {
+    public ProductDto.FindResponse findProduct(@PathVariable Long id) {
         return productService.findProduct(id);
     }
 

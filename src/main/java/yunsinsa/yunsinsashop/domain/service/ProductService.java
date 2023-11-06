@@ -2,7 +2,6 @@ package yunsinsa.yunsinsashop.domain.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yunsinsa.yunsinsashop.domain.entity.Category;
 import yunsinsa.yunsinsashop.domain.entity.Product;
@@ -52,20 +51,20 @@ public class ProductService {
 
     // 상품 조회
 
-    public ProductDto findProduct(Long id) {
+    public ProductDto.FindResponse findProduct(Long id) {
         // 1. id 로 엔티티 조회(repository 로 db 조회) -> 데이터가 없으면 에러
      Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
 
         // 2. 조회된 엔티티를 -> dto 로 변환
-        ProductDto.FindResponse response = ProductDto.FindResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .description(product.getDescription())
-                .price(product.getPrice())
-                .stock(product.getStock())
-                .categoryId(product.getCategory().getId())
-                .build();
+     ProductDto.FindResponse response = ProductDto.FindResponse.builder()
+        .id(product.getId())
+        .name(product.getName())
+        .description(product.getDescription())
+        .price(product.getPrice())
+        .stock(product.getStock())
+        .categoryId(product.getCategory().getId())
+        .build();
 
         // 3. 변환된 dto 를 반환
         return response;
@@ -78,7 +77,7 @@ public class ProductService {
     }
 
      // 상품 수정
-     public void updateProduct(ProductDto.UpdateRequest request) {
+     public void updateProduct(ProductDto.UpdateRequest request) { //dto.업뎃리퀘로 받음
          // 1. id 로 상품 조회
          Product product = productRepository.findById(request.getId())
                  .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
@@ -91,14 +90,12 @@ public class ProductService {
          // 3. request 에 들어있는 정보를 활용해서 entity 를 업데이트  -> 변경중
          product.change(request.getName(), request.getDescription(), category, request.getPrice(), request.getStock());
 
-         // 4. 변경된 값을 저장해야함.
-
    }
 
 
     // 상품 삭제
     public void deleteProduct(Long id) {
-        Product product = findProduct(id);
+        ProductDto product = findProduct(id);
         productRepository.delete(product);
     }
 }

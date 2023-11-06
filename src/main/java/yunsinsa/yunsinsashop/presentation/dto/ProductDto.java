@@ -1,5 +1,6 @@
 package yunsinsa.yunsinsashop.presentation.dto;
 
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,28 @@ public class ProductDto {
         private int price;
         private int stock;
     }
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class FindResponse {
+        private Long id;
+        private String name;
+        private String description;
+        private Long categoryId;
+        private int price;
+        private int stock;
+    }
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public class CreateResponse {
+        private Long id;
+        private String name;
+        private String description;
+        private Long categoryId;
+        private int price;
+        private int stock;
+
+    }
 }
