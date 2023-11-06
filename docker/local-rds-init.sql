@@ -69,3 +69,13 @@ CREATE TABLE tb_payment (
     updated_by VARCHAR(255)
 );
 
+INSERT INTO tb_category(category_name, created_by)VALUES('outer','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('top','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('pants','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('dress','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('Accessories','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('bag','je');
+INSERT INTO tb_category(category_name, created_by)VALUES('shoes','je');
+
+
+
