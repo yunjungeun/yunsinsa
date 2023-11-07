@@ -47,7 +47,7 @@ public class ProductService {
                 .build();
 
         return response;
-    }
+    }   // Snippet builder 따로 만들어야하나요 ???
 
     // 상품 조회
 
@@ -89,13 +89,24 @@ public class ProductService {
 
          // 3. request 에 들어있는 정보를 활용해서 entity 를 업데이트  -> 변경중
          product.change(request.getName(), request.getDescription(), category, request.getPrice(), request.getStock());
-
+// 상품수정은 왜 자동저장이 되엇나???????????????
    }
 
 
     // 상품 삭제
-    public void deleteProduct(Long id) {
+    /*public void deleteProduct(Long id) {
         ProductDto product = findProduct(id);
         productRepository.delete(product);
+    }*/
+
+    public void deleteProduct(Long id) {
+        // 레포지토리에서 아이디를 찾는다!!!!
+        Product product = productRepository.findById(id)
+                //  필수로 존재할때 씀 -> 없을때 경고메시지를 띄운다.
+                .orElseThrow(() -> new IllegalArgumentException("제품이 존재하지 않습니다."));
+
+        // 레포지토리에서 해당제품을 삭제한다!!
+        productRepository.delete(product);
     }
+
 }

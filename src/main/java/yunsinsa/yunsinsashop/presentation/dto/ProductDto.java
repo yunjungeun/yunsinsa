@@ -51,7 +51,7 @@ public class ProductDto {
     @Getter
     @Setter
     @AllArgsConstructor
-    public class CreateResponse {
+    public static class CreateResponse {
         private Long id;
         private String name;
         private String description;
