@@ -1,6 +1,5 @@
 package yunsinsa.yunsinsashop.domain.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yunsinsa.yunsinsashop.domain.entity.Category;
@@ -21,11 +20,12 @@ public class ProductService {
     // 상품 등록
     public ProductDto.CreateResponse createProduct(ProductDto.CreateRequest request) {
         //카테고리 불러옴 =  카테고리 (카테고리아이디).는 필수로 존재해야함(상품등록 시!!)
+        // 카테고리레파지토리에서 아이디를 조회 ( 디비 조회 )
         Category category = categoryRepository.findById(request.getCategoryId())
-                //  필수로 존재할때 씀 -> 없을때 경고메시지
+                                 //  필수로 존재할때 씀 -> 없을때 경고메시지
                 .orElseThrow(() -> new IllegalArgumentException("카테고리가 존재하지 않습니다."));
 
-        // Dto -> Entity
+        // Dto -> Entity | 디티오 리퀘스트에서 꺼내서 엔티티에 저장(프로덕트)
         Product newProduct = Product.builder()
                 .name(request.getName())
                 .description(request.getDescription())
@@ -33,10 +33,10 @@ public class ProductService {
                 .stock(request.getStock())
                 .category(category)
                 .build();
-
+        //     상품등록을 저장 =  프로덕트레파지토리에 저장(디비저장)
         Product savedProduct = productRepository.save(newProduct);
 
-        // Entity -> Dto
+    // Entity -> Dto |위에 엔티티에 저장한(프로덕트) savedProduct를 꺼내서 디티오에 저장(response에)
         ProductDto.CreateResponse response = ProductDto.CreateResponse.builder()
                 .id(savedProduct.getId())
                 .name(savedProduct.getName())
@@ -47,10 +47,10 @@ public class ProductService {
                 .build();
 
         return response;
-    }   // Snippet builder 따로 만들어야하나요 ???
+    }   // 빌더 에러?? -> Snippet builder 따로 만들어야하나요???
+
 
     // 상품 조회
-
     public ProductDto.FindResponse findProduct(Long id) {
         // 1. id 로 엔티티 조회(repository 로 db 조회) -> 데이터가 없으면 에러
      Product product = productRepository.findById(id)
