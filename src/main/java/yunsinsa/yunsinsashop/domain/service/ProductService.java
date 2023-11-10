@@ -8,6 +8,7 @@ import yunsinsa.yunsinsashop.domain.repository.CategoryRepository;
 import yunsinsa.yunsinsashop.domain.repository.ProductRepository;
 import yunsinsa.yunsinsashop.presentation.dto.ProductDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -47,7 +48,7 @@ public class ProductService {
                 .build();
 
         return response;
-    }   // 빌더 에러?? -> Snippet builder 따로 만들어야하나요???
+    }   // 빌더 에러?? -> Snippet builder 따로 만들어야하나요??? 빌더,, 왜케 어렵죠ㅜㅜ?
 
 
     // 상품 조회
@@ -71,9 +72,24 @@ public class ProductService {
     }
 
     // 모든 상품 조회
-    public List<Product> findAllProducts() {
+    public List<ProductDto.FindResponse> findAllProducts() { //매개변수가 없는이유는 모든 상품을 조회하기때문!
+        // db로 모든 엔티티(상품)을 조회함
+        List<Product> products = productRepository.findAll();
+        // 조회된 모든 엔티티를 dto로 변환함, 근데 양이 많아서 list로 처리
+        List<ProductDto.FindResponse> responses = new ArrayList<>();
 
-        return productRepository.findAll();
+        for(Product product : products){ // for-each 반복문(product엔티티의 모든 항목을 찾아서 아래 목록으로 리스트를 만든다.)
+            ProductDto.FindResponse response = ProductDto.FindResponse.builder()
+                    .id(product.getId())
+                    .name(product.getName())
+                    .description(product.getDescription())
+                    .price(product.getPrice())
+                    .stock(product.getStock())
+                    .categoryId(product.getCategory().getId())
+                    .build();
+            responses.add(response);  // 리스트값을 -> responses 저장
+        }
+        return responses;  // 변환된 리스트dto를 반환
     }
 
      // 상품 수정
@@ -89,15 +105,9 @@ public class ProductService {
 
          // 3. request 에 들어있는 정보를 활용해서 entity 를 업데이트  -> 변경중
          product.change(request.getName(), request.getDescription(), category, request.getPrice(), request.getStock());
-// 상품수정은 왜 자동저장이 되엇나???????????????
+         // 상품수정은 왜 자동저장이 되엇나???????????????
    }
 
-
-    // 상품 삭제
-    /*public void deleteProduct(Long id) {
-        ProductDto product = findProduct(id);
-        productRepository.delete(product);
-    }*/
 
     public void deleteProduct(Long id) {
         // 레포지토리에서 아이디를 찾는다!!!!

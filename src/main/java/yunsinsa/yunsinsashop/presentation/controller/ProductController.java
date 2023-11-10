@@ -2,7 +2,6 @@ package yunsinsa.yunsinsashop.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import yunsinsa.yunsinsashop.domain.entity.Product;
 import yunsinsa.yunsinsashop.domain.service.ProductService;
 import yunsinsa.yunsinsashop.presentation.dto.ProductDto;
 
@@ -34,7 +33,7 @@ public class ProductController {
 
     // 모든 상품 조회
     @GetMapping
-    public List<Product> findAllProducts() {
+    public List<ProductDto.FindResponse> findAllProducts() {
         return productService.findAllProducts();
     }
 
