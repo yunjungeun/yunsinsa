@@ -32,4 +32,17 @@ public class MemberDto {
         private String address;
 
     }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class CreateResponse {
+        private String name;
+        private String email;
+        private String password;
+        private String address;
+    }
+
+
+
 }
