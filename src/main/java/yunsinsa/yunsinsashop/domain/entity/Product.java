@@ -39,6 +39,7 @@ public class Product extends BaseEntity {
         this.stock = stock;
     }
 
+    @Builder
     public void change(String name, String description, Category category, int price, int stock) {  //업뎃
         this.name = name;
         this.description = description;

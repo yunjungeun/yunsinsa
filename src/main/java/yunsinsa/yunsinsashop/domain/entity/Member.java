@@ -1,6 +1,7 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
 
+import lombok.Builder;
 import lombok.Setter;
 import yunsinsa.yunsinsashop.domain.model.Address;
 
@@ -39,4 +40,15 @@ public class Member extends BaseEntity {
 //    public void changeOrder(Order order) {
 //        // order 를 교체하는 로직
 //    }
+
+
+
+    @Builder
+    public Member(String nama, String email,String password, String address){
+        this.name=nama;
+        this.email=email;
+        this.password=password;
+        this.address=address;
+    }
+
 }
