@@ -1,6 +1,7 @@
 package yunsinsa.yunsinsashop.presentation.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,19 +13,22 @@ import javax.persistence.GeneratedValue;
 public class MemberDto {
     @Getter
     @Setter
+    @Builder
     @AllArgsConstructor
-    private static class CreateRequest{
+    public static class CreateRequest{
         private String name;
         private String email;
         private String password;
-        private String address;
-
+        private String street;
+        private String city;
+        private String state;
+        private int zipcode;
     }
 
     @Getter
     @Setter
     @AllArgsConstructor
-    private static class UpdateRequest{
+    public static class UpdateRequest{
         private Long id;
         private String name;
         private String email;
@@ -33,14 +37,17 @@ public class MemberDto {
 
     }
 
-    @Getter
     @Setter
+    @Getter
+    @Builder
     @AllArgsConstructor
     public static class CreateResponse {
         private String name;
         private String email;
-        private String password;
-        private String address;
+        private String street;
+        private String city;
+        private String state;
+        private int zipcode;
     }
 
 

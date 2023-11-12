@@ -2,6 +2,7 @@ package yunsinsa.yunsinsashop.presentation.dto;
 
 import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class ProductDto {
 
     @Getter
     @Setter
+    @Builder
     @AllArgsConstructor
     public static class CreateRequest {
         private String name;
@@ -27,6 +29,7 @@ public class ProductDto {
 
     @Getter
     @Setter
+    @Builder
     @AllArgsConstructor
     public static class UpdateRequest {
         private Long id;
@@ -38,6 +41,7 @@ public class ProductDto {
     }
     @Getter
     @Setter
+    @Builder
     @AllArgsConstructor
     public static class FindResponse {
         private Long id;
@@ -50,6 +54,7 @@ public class ProductDto {
 
     @Getter
     @Setter
+    @Builder
     @AllArgsConstructor
     public static class CreateResponse {
         private Long id;
@@ -58,6 +63,5 @@ public class ProductDto {
         private Long categoryId;
         private int price;
         private int stock;
-
     }
 }

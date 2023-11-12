@@ -2,6 +2,7 @@ package yunsinsa.yunsinsashop.domain.entity;
 
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import yunsinsa.yunsinsashop.domain.model.Address;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "tb_member")
 public class Member extends BaseEntity {
@@ -41,18 +43,15 @@ public class Member extends BaseEntity {
 //        // order 를 교체하는 로직
 //    }
 
-
-
     @Builder
-    public Member(String nama, String email,String password, String address){
-        this.name=nama;
+    public Member(String name, String email,String password, Address address){
+        this.name=name;
         this.email=email;
         this.password=password;
         this.address=address;
     }
 
-    @Builder
-    public void change(String name, String email, String password, String address){
+    public void change(String name, String email, String password, Address address){
         this.name = name;
         this.email = email;
         this.password = password;

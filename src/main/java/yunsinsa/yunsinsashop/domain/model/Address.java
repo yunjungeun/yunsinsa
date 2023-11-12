@@ -1,8 +1,12 @@
 package yunsinsa.yunsinsashop.domain.model;
 
+import lombok.Builder;
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@Getter
 @Embeddable
 public class Address {
 
@@ -18,4 +22,11 @@ public class Address {
     @Column(name = "zipcode")
     private int zipcode;
 
+    @Builder
+    public Address(String street, String city, String state, int zipcode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+    }
 }
