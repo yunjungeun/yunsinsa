@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class) // 비지니스로직 작성할 때 작성일, 수정일등을 매번 작성하는게 번거로우니 "감사" 기능을 활용하면 jpa 가 알아서 넣어줌
+@EntityListeners(AuditingEntityListener.class)
+// 비지니스로직 작성할 때 작성일, 수정일등을 매번 작성하는게 번거로우니 "감사" 기능을 활용하면 jpa 가 알아서 넣어줌
 public class BaseEntity {
 
     @CreatedDate
