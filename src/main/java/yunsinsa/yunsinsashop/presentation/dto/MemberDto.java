@@ -33,8 +33,10 @@ public class MemberDto {
         private String name;
         private String email;
         private String password;
-        private String address;
-
+        private String street;
+        private String city;
+        private String state;
+        private int zipcode;
     }
 
     @Setter
@@ -50,6 +52,14 @@ public class MemberDto {
         private int zipcode;
     }
 
-
+    @Getter
+    @Setter
+    @Builder
+    @AllArgsConstructor
+    public static class FindResponse {
+        private Long id;
+        private String name;
+        private String email;
+    }
 
 }

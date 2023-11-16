@@ -113,9 +113,13 @@ public class ProductService {
                  .orElseThrow(() -> new IllegalArgumentException("카테고리가 존재하지 않습니다."));
 
          // 3. request 에 들어있는 정보를 활용해서 entity 를 업데이트  -> 변경중
-         // 변경 감지에 의해서 save 호출 없어도, commit 되는 시점에 영속성 컨텍스트에 있는 엔티티가 db 에 반영
-         product.change(request.getName(), request.getDescription(), category, request.getPrice(), request.getStock());
-    }
+         // 변경 감지에 의해서 save 호출 없어도, commit 되는 시점에 영속성 컨텍스트에 있는 엔티티가 db에 반영
+         product.change(request.getName(),
+                 request.getDescription(),
+                 category,
+                 request.getPrice(),
+                 request.getStock());
+                }
 
     @Transactional
     public void deleteProduct(Long id) {
