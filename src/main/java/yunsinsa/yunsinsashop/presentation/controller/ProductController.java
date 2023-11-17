@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequiredArgsConstructor // final 이 붙어있거나 @Nonnull 어노테이션이 붙어 있는 필드를 = Required Arguments
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/products") // 주소값은 보통 뒤에 s를 붙힌다
 public class ProductController {
 
     private final ProductService productService;

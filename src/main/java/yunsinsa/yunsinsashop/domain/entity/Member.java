@@ -57,5 +57,4 @@ public class Member extends BaseEntity {
         this.password = password;
         this.address = address;
     }
-
 }
