@@ -25,7 +25,7 @@ public class Order extends BaseEntity {
 
 
     // 테이블에서 FK 를 가지고 있는 엔티티가 양방향 연관관계에서의 주인이 된다.
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -39,9 +39,14 @@ public class Order extends BaseEntity {
     @Enumerated(value = EnumType.STRING) // db에서 인덱스넘버 0.1.2 로 나타남 -> String 으로 바꿈(CREATED,PROGRESS,COMPLETED)
     private OrderStatus orderStatus;  //주문상태
 
+
+    @OneToMany(mappedBy = "orderDetail")
+    private OrderDetail orderDetail;
+
     // 연관관계 편의 메서드
 //    public void changeMember(Member newMember) {
 //        this.member = newMember;
 //        newMember.changeOrder(this);
 //    }
+
 }

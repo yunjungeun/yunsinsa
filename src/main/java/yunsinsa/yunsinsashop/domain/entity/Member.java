@@ -33,8 +33,8 @@ public class Member extends BaseEntity {
 
     // 처음에는 무조건 단방향으로 설계를 하되, 나중에 필요로하면 양방향 연관관계를 설정
     // 연관관계 주인이 아닌 곳(@OneToMany)에는 mappedBy 로 연관관계 주인을 지정
-//    @OneToMany(mappedBy = "member")
-//    private List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     @Column(name="password")
     private String password;
