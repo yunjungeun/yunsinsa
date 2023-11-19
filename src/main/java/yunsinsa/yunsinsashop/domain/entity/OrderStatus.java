@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum OrderStatus {
-    CREATED("주문 전"),PROGRESS("주문 중"),COMPLETED("주문완료");
+//    CREATED("주문 전"),PROGRESS("주문 중"),
+    COMPLETED("주문완료");
 
     private final String description;
 }

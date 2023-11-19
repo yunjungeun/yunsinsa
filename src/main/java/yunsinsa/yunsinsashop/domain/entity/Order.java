@@ -1,10 +1,12 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
+import lombok.Builder;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /*
 객체 그래프 탐색
@@ -32,6 +34,10 @@ public class Order extends BaseEntity {
     @Column(name="order_at", nullable = false)
     private LocalDateTime orderAt;
 
+    // 파란색 셔츠 외 1건
+//    @Transient
+//    private String orderName;
+
     @Column(name = "address", nullable = false, length = 255)
     private String address;
 
@@ -40,8 +46,8 @@ public class Order extends BaseEntity {
     private OrderStatus orderStatus;  //주문상태
 
 
-    @OneToMany(mappedBy = "orderDetail")
-    private OrderDetail orderDetail;
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
 
     // 연관관계 편의 메서드
 //    public void changeMember(Member newMember) {
@@ -49,4 +55,13 @@ public class Order extends BaseEntity {
 //        newMember.changeOrder(this);
 //    }
 
+    @Builder
+    public Order(Long id, Member member, LocalDateTime orderAt, String address, OrderStatus orderStatus, List<OrderDetail> orderDetails) {
+        this.id = id;
+        this.member = member;
+        this.orderAt = orderAt;
+        this.address = address;
+        this.orderStatus = orderStatus;
+        this.orderDetails = orderDetails;
+    }
 }

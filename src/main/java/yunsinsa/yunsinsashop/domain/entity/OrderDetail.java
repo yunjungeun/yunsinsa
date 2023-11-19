@@ -1,5 +1,6 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
+import lombok.Builder;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -27,4 +28,16 @@ public class OrderDetail extends BaseEntity {
     @Column(name = "price", nullable = false)
     private int price;
 
+    @Builder
+    public OrderDetail(Long id, Order order, Product product, int quantity, int price) {
+        this.id = id;
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }

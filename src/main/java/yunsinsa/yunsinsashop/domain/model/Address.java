@@ -29,4 +29,9 @@ public class Address {
         this.state = state;
         this.zipcode = zipcode;
     }
+
+    @Override
+    public String toString() {
+        return city + " " + state + " 우편번호: " + zipcode;
+    }
 }

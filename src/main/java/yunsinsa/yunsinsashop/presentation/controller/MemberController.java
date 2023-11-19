@@ -22,7 +22,7 @@ public class MemberController {
 
 
 //회원 조회
-    @GetMapping
+    @GetMapping("/{id}")
     public MemberDto.FindResponse findResponse(@PathVariable Long id){
         return memberService.findMember(id);
     }
