@@ -35,7 +35,7 @@ public class Order extends BaseEntity {
     private LocalDateTime orderAt;
 
     // 파란색 셔츠 외 1건
-//    @Transient
+//    @Transient  //->  해당 요소가 일시적이거나 순간적인 상태,해당 필드가 데이터베이스에 저장되지 않아야 한다는 것을 나타냄
 //    private String orderName;
 
     @Column(name = "address", nullable = false, length = 255)

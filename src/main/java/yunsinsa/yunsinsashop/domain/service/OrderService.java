@@ -1,7 +1,6 @@
 package yunsinsa.yunsinsashop.domain.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yunsinsa.yunsinsashop.domain.entity.Order;
