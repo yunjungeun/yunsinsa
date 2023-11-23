@@ -14,4 +14,5 @@ JAVA, JPA, MySQL <br>
 spring boot, gradle, docker, postman, github
 
 # 내용
-DB설계: 
+DB설계: <br>
+<img src="https://github.com/yunjungeun/yunsinsa/assets/133863188/9aaf4982-a95c-4666-a78d-96124e0de3be" width="800" height="600">
