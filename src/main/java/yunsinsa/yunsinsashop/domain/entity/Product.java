@@ -1,12 +1,10 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -45,6 +43,11 @@ public class Product extends BaseEntity {
 
     @Column(name="stock", nullable = false)
     private int stock;
+
+    public void setStock(int newStock) {
+        this.stock = newStock;
+    }
+
 
     @Builder
     public Product(Long id, String name, String description, Category category, int price, int stock) {

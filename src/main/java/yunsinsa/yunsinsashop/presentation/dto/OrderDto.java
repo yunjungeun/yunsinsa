@@ -7,7 +7,6 @@ import lombok.Setter;
 
 public class OrderDto {
 
-
     /**
      *  Dto 구성 -
      *  회원정보: { "회원아이디": 1, .... },

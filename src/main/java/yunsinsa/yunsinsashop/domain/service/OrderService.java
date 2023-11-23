@@ -3,6 +3,7 @@ package yunsinsa.yunsinsashop.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import yunsinsa.yunsinsashop.domain.entity.Order;
 import yunsinsa.yunsinsashop.domain.entity.OrderDetail;
 import yunsinsa.yunsinsashop.domain.entity.OrderStatus;
@@ -26,7 +27,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void create(OrderDto.CreateRequest request) {
+    public void create(OrderDto.CreateRequest request) {  //주문생성 및 재고확인
         var product = productRepository.findById(request.getOrderDetail().getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ProductId"));
 
@@ -59,12 +60,30 @@ public class OrderService {
                 .orderDetails(orderDetails)
                 .build();
 
+        product.setStock(product.getStock() - request.getOrderDetail().getStock());
+        productRepository.save(product); //주문될 때마다 해당 상품의 재고가 감소!!
+
         // 양방향 연관관계에 따라서 order 도 같이 세팅
         orderDetail.setOrder(order);
 
         var savedOrder = orderRepository.save(order);
 
+
         // 결제
-//        paymentService.createPayment(결제에 필요한 정보를 전달);
+        //paymentService.createPayment(결제에 필요한 정보를 전달);
     }
+
+
+
+    @Transactional(readOnly = true)
+    public Order getOrderById(Long id) {  // 아이디 선택하여 조회
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid OrderId"));
+    }
+
+    @Transactional(readOnly = true) // 전체주문조회
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
 }
