@@ -22,7 +22,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final PaymentService paymentService;
+   // private final PaymentService paymentService;
     private final MemberRepository memberRepository;
 
     @Transactional
