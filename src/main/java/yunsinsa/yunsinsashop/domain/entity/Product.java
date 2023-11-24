@@ -3,6 +3,20 @@ package yunsinsa.yunsinsashop.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+/**
+ * FetchType.EAGER = 연관관계 엔티티를 join 을 통해서 한꺼번에 조회해온다.
+ *   -> Product 랑 Category 를 한꺼번에 가져옴
+ *
+ * FetchType.LAZY = 연관관계 엔티티를 실제로 사용하는 시점에 select 쿼리를 날려서 데이터를 가져온다.
+ *   -> 1. Product 만 가져오고
+ *   -> 2. Category 를 사용하는 시점에 쿼리를 날려서 데이터를 가져온다.
+ *
+ *   문제!!!
+ *   Lazy Option 을 주게 되면, 사용하는 시점마다 쿼리가 날라가기때문에 (N+1) 성능적인 영향이 있다.
+ *   -> 해결: sql의 join문을 사용하지말고 in절을 사용하자
+ *   yml 에  default_batch_fetch_size: 1000    <-추가하자, 해석: in절 1000가능함
+ *
+ */
 
 @Setter
 @Getter
@@ -15,34 +29,27 @@ public class Product extends BaseEntity {
     @Column(name = "product_id")
     private Long id;
 
+
     @Column(name = "product_name", nullable=false)
     private String name;
+
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    /**
-     * FetchType.EAGER = 연관관계 엔티티를 join 을 통해서 한꺼번에 조회해온다.
-     *   -> Product 랑 Category 를 한꺼번에 가져옴
-     *
-     * FetchType.LAZY = 연관관계 엔티티를 실제로 사용하는 시점에 select 쿼리를 날려서 데이터를 가져온다.
-     *   -> 1. Product 만 가져오고
-     *   -> 2. Category 를 사용하는 시점에 쿼리를 날려서 데이터를 가져온다.
-     *
-     *   문제!!!
-     *   Lazy Option 을 주게 되면, 사용하는 시점마다 쿼리가 날라가기때문에 (N+1) 성능적인 영향이 있다.
-     *
-     */
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
 
+
     @Column(name="price", nullable = false)
     private int price;
 
+
     @Column(name="stock", nullable = false)
     private int stock;
+
 
     public void setStock(int newStock) {
         this.stock = newStock;

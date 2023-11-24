@@ -32,14 +32,14 @@ public class ProductController {
     }
 
     // 모든 상품 조회
-    @GetMapping
+    @GetMapping("/all")
     public List<ProductDto.FindResponse> findAllProducts() {
         return productService.findAllProducts();
     }
 
-    // 상품 수정
-    @PutMapping  // 전체수정일때 매핑
-    public void updateProduct(@RequestBody ProductDto.UpdateRequest request) { //서비스와 같아야함
+    // 상품 수정 -전체수정일때 매핑 / 서비스와 같아야함
+    @PutMapping("/update")
+    public void updateProduct(@RequestBody ProductDto.UpdateRequest request) {
         productService.updateProduct(request);
     }
 

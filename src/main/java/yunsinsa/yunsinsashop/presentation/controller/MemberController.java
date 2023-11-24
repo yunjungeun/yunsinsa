@@ -29,20 +29,20 @@ public class MemberController {
 
 
 // 모든 회원 조회
-    @GetMapping
+    @GetMapping("/all")
     public List<MemberDto.FindResponse> findResponses(){
         return memberService.findAllMembers();
     }
 
 
 //회원 정보수정
-    @PutMapping
+    @PutMapping("/{id]")
     public void updateMember(@RequestBody MemberDto.UpdateRequest request){
     memberService.updateMember(request); }
 
 
 //회원 삭제
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteMember(@PathVariable Long id){
         memberService.deleteMember(id);
     }

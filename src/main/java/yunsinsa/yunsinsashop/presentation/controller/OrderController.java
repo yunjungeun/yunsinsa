@@ -19,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderDetailService orderDetailService;
 
-    @PostMapping("/createOrder")
+    @PostMapping
     public void createOrder(@RequestBody OrderDto.CreateRequest request){
         orderService.create(request);
     }
