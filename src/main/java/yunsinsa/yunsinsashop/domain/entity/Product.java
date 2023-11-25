@@ -3,6 +3,7 @@ package yunsinsa.yunsinsashop.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+
 /**
  * FetchType.EAGER = 연관관계 엔티티를 join 을 통해서 한꺼번에 조회해온다.
  *   -> Product 랑 Category 를 한꺼번에 가져옴

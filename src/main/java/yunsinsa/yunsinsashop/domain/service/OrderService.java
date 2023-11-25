@@ -26,28 +26,31 @@ public class OrderService {
    // private final PaymentService paymentService;
     private final MemberRepository memberRepository;
 
-    @Transactional
-    public void create(OrderDto.CreateRequest request) {  //주문생성 및 재고확인
+    @Transactional     //주문생성 및 재고확인
+    public void create(OrderDto.CreateRequest request) {
         var product = productRepository.findById(request.getOrderDetail().getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ProductId"));
 
-        // 주문하려는 상품의 재고가 존재하는지 확인
+        // 1. 주문하려는 상품의 재고가 존재하는지 확인
         if (product.getStock() < request.getOrderDetail().getStock()) {
             throw new RuntimeException("Out of Stock");
         }
 
+        // 2. 멤버 아이디를 찾음
         var member = memberRepository.findById(request.getMemberInfo().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid MemberId"));
-
+        // 3. 주문상세정보에 필요한것
         var orderDetail = OrderDetail.builder()
                 .price(product.getPrice())
                 .quantity(request.getOrderDetail().getStock())
                 .product(product)
                 .build();
 
+        // 4. 주문상세를 리스트로 만듬
         List<OrderDetail> orderDetails = new ArrayList<>();
         orderDetails.add(orderDetail);
 
+        // 5. 주문에 대한 필요한 정보를 찾음
         var order = Order.builder()
                 .member(member)
                 .orderAt(LocalDateTime.now())
@@ -60,12 +63,14 @@ public class OrderService {
                 .orderDetails(orderDetails)
                 .build();
 
+
         product.setStock(product.getStock() - request.getOrderDetail().getStock());
         productRepository.save(product); //주문될 때마다 해당 상품의 재고가 감소!!
 
         // 양방향 연관관계에 따라서 order 도 같이 세팅
         orderDetail.setOrder(order);
 
+        // 레파짓토리에 주문을 저장함
         var savedOrder = orderRepository.save(order);
 
 
