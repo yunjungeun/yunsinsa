@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
+import javax.validation.constraints.NotNull;
 
+// TODO 필요 없는 어노테이션 삭제
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,13 +17,20 @@ public class MemberDto {
     @Setter
     @Builder
     @AllArgsConstructor
-    public static class CreateRequest{
+    public static class CreateRequest {
+        @NotNull
         private String name;
+        @NotNull
         private String email;
+        @NotNull
         private String password;
+        @NotNull
         private String street;
+        @NotNull
         private String city;
+        @NotNull
         private String state;
+        @NotNull
         private int zipcode;
     }
 

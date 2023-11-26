@@ -27,7 +27,4 @@ public class OrderDetailService {
         return orderDetailRepository.findById(orderDetailId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid OrderDetailId"));
     }
-
-
-
 }

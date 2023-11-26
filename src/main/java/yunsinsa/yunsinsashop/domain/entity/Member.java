@@ -36,7 +36,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
 //    public void changeOrder(Order order) {

@@ -37,6 +37,7 @@ public class OrderDetail extends BaseEntity {
         this.price = price;
     }
 
+    // TODO set 이라는 이름 말고 change 같은 이름 사용
     public void setOrder(Order order) {
         this.order = order;
     }

@@ -63,7 +63,7 @@ public class ProductService {
     public ProductDto.FindResponse findProduct(Long id) {
         // 1. id 로 엔티티 조회(repository 로 db 조회) -> 데이터가 없으면 에러
      Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("not find.."));
 
         // 2. 조회된 엔티티를 -> dto 로 변환
      ProductDto.FindResponse response = ProductDto.FindResponse.builder()

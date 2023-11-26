@@ -1,3 +1,4 @@
+
 package yunsinsa.yunsinsashop.infra.repository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,3 +20,5 @@ public class CategoryReaderImpl implements CategoryReader {
         return categoryRepository.findAllCategories();
     }
 }
+
+

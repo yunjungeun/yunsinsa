@@ -1,6 +1,7 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
  */
 
+@Getter
 @Entity
 @Table(name = "tb_order")
 public class Order extends BaseEntity {

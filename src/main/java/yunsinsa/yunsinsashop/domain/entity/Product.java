@@ -19,7 +19,7 @@ import javax.persistence.*;
  *
  */
 
-@Setter
+@Setter // TODO Entity 에서 가급적 setter 사용 x
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity

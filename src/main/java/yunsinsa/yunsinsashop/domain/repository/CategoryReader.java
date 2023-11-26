@@ -1,3 +1,4 @@
+
 package yunsinsa.yunsinsashop.domain.repository;
 
 import yunsinsa.yunsinsashop.domain.entity.Category;
@@ -8,3 +9,4 @@ public interface CategoryReader {
 
     List<Category> findAllCategories();
 }
+

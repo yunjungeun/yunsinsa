@@ -76,6 +76,7 @@ public class MemberService {
         return responses;
     }
 
+    // TODO 트랜잭셔널 어노테이션
     // 회원 수정
     public void updateMember(MemberDto.UpdateRequest request) {
         Member member = memberRepository.findById(request.getId()) // id를 db에서 찾아서 조회를 함

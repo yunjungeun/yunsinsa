@@ -37,6 +37,7 @@ public class ProductDto {
         private int price;
         private int stock;
     }
+
     @Getter
     @Setter
     @Builder

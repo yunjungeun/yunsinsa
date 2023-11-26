@@ -13,6 +13,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    // TODO 테스트 용으로 만든 코드들은 제거
     public void findAllCategory() {
         var categories = categoryRepository.findAll();
 
@@ -23,6 +24,7 @@ public class CategoryService {
                     .map(it -> it.getId())
                     .collect(Collectors.toList());
         }
+
         System.out.println("11111111");
     }
 
