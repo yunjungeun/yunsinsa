@@ -8,7 +8,8 @@ CREATE TABLE tb_product (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
-    updated_by VARCHAR(255)
+    updated_by VARCHAR(255),
+    version BIGINT
 );
 
 CREATE TABLE tb_category (
@@ -17,7 +18,8 @@ CREATE TABLE tb_category (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
-    updated_by VARCHAR(255)
+    updated_by VARCHAR(255),
+    version BIGINT
 );
 
 CREATE TABLE tb_member (
@@ -32,7 +34,8 @@ CREATE TABLE tb_member (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
-    updated_by VARCHAR(255)
+    updated_by VARCHAR(255),
+    version BIGINT
  );
 
  CREATE TABLE tb_order (
@@ -44,7 +47,8 @@ CREATE TABLE tb_member (
      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      created_by VARCHAR(255) NOT NULL,
-     updated_by VARCHAR(255)
+     updated_by VARCHAR(255),
+     version BIGINT
  );
 
 CREATE TABLE tb_order_detail (
@@ -56,7 +60,8 @@ CREATE TABLE tb_order_detail (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
-    updated_by VARCHAR(255)
+    updated_by VARCHAR(255),
+    version BIGINT
 );
 
 CREATE TABLE tb_payment (
@@ -70,7 +75,8 @@ CREATE TABLE tb_payment (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by VARCHAR(255) NOT NULL,
-    updated_by VARCHAR(255)
+    updated_by VARCHAR(255),
+    version BIGINT
 );
 
 INSERT INTO tb_category(category_name, created_by)VALUES('outer','je');

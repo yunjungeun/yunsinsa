@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
-@Embeddable  // 해당 어노테이션이 지정된 클래스의 인스턴스는 다른 엔터티 클래스에 속성으로 포함 있는것을 의미
+@Embeddable
 public class Address {
 
     @Column(name = "street")

@@ -8,7 +8,7 @@ import yunsinsa.yunsinsashop.domain.entity.Category;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category,Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     // join fetch 를 사용하면 INNER JOIN 을 통해서 데이터를 한 꺼번에 가져온다. ("select c from Category c join fetch c.products")
    @Query("select c from Category c join fetch c.products")

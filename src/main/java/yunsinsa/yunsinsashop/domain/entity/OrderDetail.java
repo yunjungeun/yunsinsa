@@ -1,16 +1,14 @@
 package yunsinsa.yunsinsashop.domain.entity;
 
 import lombok.Builder;
-import lombok.Setter;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "tb_order_detail")
 public class OrderDetail extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // id 생성을 db 로 위임 :자동 증가(primary key) 역할
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_detail_id")
     private Long id;
 
@@ -37,8 +35,7 @@ public class OrderDetail extends BaseEntity {
         this.price = price;
     }
 
-    // TODO set 이라는 이름 말고 change 같은 이름 사용
-    public void setOrder(Order order) {
+    public void changeOrder(Order order) {
         this.order = order;
     }
 }

@@ -103,7 +103,7 @@ public class OrderService {
         productRepository.save(product); //주문될 때마다 해당 상품의 재고가 감소!!
 
         // 양방향 연관관계에 따라서 order 도 같이 세팅
-        orderDetail.setOrder(order);
+        orderDetail.changeOrder(order);
 
         // 레파짓토리에 주문을 저장함
         var savedOrder = orderRepository.save(order);

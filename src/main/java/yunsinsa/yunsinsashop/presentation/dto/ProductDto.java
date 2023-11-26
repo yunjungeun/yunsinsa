@@ -1,6 +1,5 @@
 package yunsinsa.yunsinsashop.presentation.dto;
 
-import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,10 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor //모든 필드를 파라미터로 받는 생성자를 자동으로 생성하고, 모든 필드를 초기화하는 역할
+@AllArgsConstructor
 public class ProductDto {
-    // 사용하는 필드가 비슷하다고 해서 객체 하나로 처리하는 것보다 -> 요청마다 dto 도 나누는게 좋음
-    // nested class 를 활용
 
     @Getter
     @Setter

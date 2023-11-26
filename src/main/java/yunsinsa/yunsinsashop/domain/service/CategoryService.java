@@ -14,7 +14,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     // TODO 테스트 용으로 만든 코드들은 제거
-    public void findAllCategory() {
+    /*public void findAllCategory() {
         var categories = categoryRepository.findAll();
 
         // iter -> enchanced for 문을 작성해줌
@@ -26,6 +26,5 @@ public class CategoryService {
         }
 
         System.out.println("11111111");
-    }
-
+    }*/
 }

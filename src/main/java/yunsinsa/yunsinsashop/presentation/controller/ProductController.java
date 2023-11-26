@@ -7,43 +7,51 @@ import yunsinsa.yunsinsashop.presentation.dto.ProductDto;
 
 import java.util.List;
 
-@RequiredArgsConstructor // final 이 붙어있거나 @Nonnull 어노테이션이 붙어 있는 필드를 = Required Arguments
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/products") // 주소값은 보통 뒤에 s를 붙힌다
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
 
-//    @Autowired
-//    public ProductController(ProductService productService) {
-//        this.productService = productService;
-//    }
-
-    // 상품 등록
+    /**
+     * 상품 생성
+     *
+     */
     @PostMapping
     public ProductDto.CreateResponse createProduct(@RequestBody ProductDto.CreateRequest request) {
         return productService.createProduct(request);
     }
 
-    // 상품 조회
+    /**
+     * 상품 조회
+     * @param id 조회할 상품 아이디
+     */
     @GetMapping("/{id}")
     public ProductDto.FindResponse findProduct(@PathVariable Long id) {
         return productService.findProduct(id);
     }
 
-    // 모든 상품 조회
+    /**
+     * 모든 상품 조회
+     */
     @GetMapping("/all") // TODO all 자체가 필요 없음
     public List<ProductDto.FindResponse> findAllProducts() {
         return productService.findAllProducts();
     }
 
-    // 상품 수정 -전체수정일때 매핑 / 서비스와 같아야함
+    /**
+     * 상품 수정
+     */
     @PutMapping("/update")
     public void updateProduct(@RequestBody ProductDto.UpdateRequest request) {
         productService.updateProduct(request);
     }
 
-    // 상품 삭제
+    /**
+     * 상품 삭제
+     * @param id 삭제할 상품의 아이디
+     */
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

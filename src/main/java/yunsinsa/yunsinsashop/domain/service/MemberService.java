@@ -19,6 +19,9 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    /**
+     * 회원 생성
+     */
     @Transactional
     public MemberDto.CreateResponse createMember(MemberDto.CreateRequest request) {
         Member newMember = Member.builder()
@@ -46,7 +49,10 @@ public class MemberService {
                 .build();
     }
 
-    // 회원 조회
+    /**
+     * 멤버 조회
+     * @param id 조회할 멤버의 아이디
+     */
     public MemberDto.FindResponse findMember(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
@@ -60,7 +66,9 @@ public class MemberService {
         return response;
     }
 
-  //   모든 회원 조회
+    /**
+     * 모든 회원 조회
+     */
     public List<MemberDto.FindResponse> findAllMembers() {
         List<Member> members = memberRepository.findAll(); //모든회원조회라서 다 찾고
         List<MemberDto.FindResponse> responses = new ArrayList<>(); // 리스트로 목록만듬
@@ -76,13 +84,14 @@ public class MemberService {
         return responses;
     }
 
-    // TODO 트랜잭셔널 어노테이션
-    // 회원 수정
+    /**
+     * 회원 수정
+     */
+    @Transactional
     public void updateMember(MemberDto.UpdateRequest request) {
-        Member member = memberRepository.findById(request.getId()) // id를 db에서 찾아서 조회를 함
+        Member member = memberRepository.findById(request.getId())
                 .orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
-        //주소 정보 업데이트가 필요함 (그냥 address로는 안되서 dto에 맞게 업뎃address로 처리함)
         Address newAddress = Address.builder()
                 .street(request.getStreet())
                 .city(request.getCity())
@@ -97,13 +106,15 @@ public class MemberService {
                 request.getPassword(),
                 newAddress
         );
-
         // 저장
         memberRepository.save(member);
     }
 
-
-    // 회원 삭제
+    /**
+     * 회원 삭제
+     * @param id 삭제할 회원의 아이디
+     */
+    @Transactional
     public void deleteMember(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("회원이 존재하지 않습니다."));

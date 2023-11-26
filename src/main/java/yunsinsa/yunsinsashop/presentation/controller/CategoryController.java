@@ -1,3 +1,4 @@
+/*
 package yunsinsa.yunsinsashop.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -16,3 +17,4 @@ public class CategoryController {
         categoryService.findAllCategory();
     }
 }
+*/

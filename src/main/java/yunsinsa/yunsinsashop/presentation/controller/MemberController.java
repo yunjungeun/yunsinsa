@@ -8,46 +8,54 @@ import yunsinsa.yunsinsashop.presentation.dto.MemberDto;
 
 import java.util.List;
 
-@RequiredArgsConstructor //final 으로 쓰인 대상자에 관해서 생성자를 만든다
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/members")
 public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     *  회원 생성
+     */
     @PostMapping
-    public MemberDto.CreateResponse createMember(@Validated @RequestBody MemberDto.CreateRequest request){
+    public MemberDto.CreateResponse createMember(@Validated @RequestBody MemberDto.CreateRequest request) {
         return memberService.createMember(request);
     }
 
-
-//회원 조회
+    /**
+     *  선택 회원 조회
+     * @param id 조회할 회원의 아이디
+     *
+     */
     @GetMapping("/{id}")
     public MemberDto.FindResponse findResponse(@PathVariable Long id){
         return memberService.findMember(id);
     }
 
-
-// 모든 회원 조회
+    /**
+     * 모든 회원 조회
+     */
     @GetMapping("/all")
     public List<MemberDto.FindResponse> findResponses(){
         return memberService.findAllMembers();
     }
 
-
-//회원 정보수정
+    /**
+     *
+     * 회원 수정
+     */
     @PutMapping("/update/{id}")
-    public void updateMember(@RequestBody MemberDto.UpdateRequest request){
-    memberService.updateMember(request); }
-
+    public void updateMember(@RequestBody MemberDto.UpdateRequest request) {
+    memberService.updateMember(request);
+    }
 
     /**
      * 회원 삭제
      * @param id 삭제를 하기 위한 회원의 아이디
      */
     @DeleteMapping("delete/{id}")
-    public void deleteMember(@PathVariable Long id){
+    public void deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
     }
-
 }

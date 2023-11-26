@@ -18,7 +18,7 @@ public class OrderDto {
     @Setter
     @Builder
     @AllArgsConstructor
-    public static class CreateRequest {  //오너디티오: 3가지 구성
+    public static class CreateRequest {
         private MemberInfoDto memberInfo;
         private DeliveryInfoDto deliveryInfo;
         private OrderDetailDto orderDetail;
@@ -28,7 +28,7 @@ public class OrderDto {
     @Setter
     @Builder
     @AllArgsConstructor
-    public static class MemberInfoDto { //주문자 정보
+    public static class MemberInfoDto {
         private Long id;
     }
 
@@ -36,7 +36,7 @@ public class OrderDto {
     @Setter
     @Builder
     @AllArgsConstructor
-    public static class DeliveryInfoDto {  //주문정보
+    public static class DeliveryInfoDto {
         private String city;
         private String street;
         private int zipcode;
@@ -46,7 +46,7 @@ public class OrderDto {
     @Setter
     @Builder
     @AllArgsConstructor
-    public static class OrderDetailDto { // 주문상세 정보
+    public static class OrderDetailDto {
         private Long productId;
         private int stock;
     }

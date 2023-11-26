@@ -26,7 +26,9 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    // 상품 등록
+    /**
+     * 상품 등록
+     */
     @Transactional
     public ProductDto.CreateResponse createProduct(ProductDto.CreateRequest request) {
         //카테고리 불러옴 =  카테고리 (카테고리아이디).는 필수로 존재해야함(상품등록 시!!)
@@ -57,9 +59,12 @@ public class ProductService {
                 .build();
 
         return response;
-    }   // 빌더 에러?? -> Snippet builder 따로 만들어야하나요??? 빌더,, 왜케 어렵죠ㅜㅜ?
+    }
 
-    // 상품 조회
+    /**
+     * 상품 조회
+     * @param id 조회할 아이디
+     */
     public ProductDto.FindResponse findProduct(Long id) {
         // 1. id 로 엔티티 조회(repository 로 db 조회) -> 데이터가 없으면 에러
      Product product = productRepository.findById(id)
@@ -79,8 +84,10 @@ public class ProductService {
         return response;
     }
 
-    // 모든 상품 조회
-    public List<ProductDto.FindResponse> findAllProducts() { //매개변수가 없는이유는 모든 상품을 조회하기때문!
+    /**
+     * 모든 상품 조회
+     */
+    public List<ProductDto.FindResponse> findAllProducts() {
         // db로 모든 엔티티(상품)을 조회함
         List<Product> products = productRepository.findAll();
         // 조회된 모든 엔티티를 dto로 변환함, 근데 양이 많아서 list로 처리
@@ -100,7 +107,9 @@ public class ProductService {
         return responses;  // 변환된 리스트dto를 반환
     }
 
-     // 상품 수정
+    /**
+     * 상품 수정
+     */
      @Transactional
      public void updateProduct(ProductDto.UpdateRequest request) { //dto.업뎃리퀘로 받음
          // 1. id 로 상품 조회
@@ -121,6 +130,10 @@ public class ProductService {
                  request.getStock());
                 }
 
+    /**
+     * 상품 삭제
+      * @param id 삭제할 상품의 아이디
+     */
     @Transactional
     public void deleteProduct(Long id) {
         // 레포지토리에서 아이디를 찾는다!!!!
