@@ -24,35 +24,36 @@ public class MemberService {
      */
     @Transactional
     public MemberDto.CreateResponse createMember(MemberDto.CreateRequest request) {
-        Member newMember = Member.builder()
-                .name(request.getName())
-                .address(
-                        Address.builder()
-                                .city(request.getCity())
-                                .street(request.getStreet())
-                                .state(request.getState())
-                                .zipcode(request.getZipcode())
-                                .build()
-                )
-                .email(request.getEmail())
-                .build();
+            Member newMember = Member.builder()
+                    .name(request.getName())
+                    .address(
+                            Address.builder()
+                                    .city(request.getCity())
+                                    .street(request.getStreet())
+                                    .state(request.getState())
+                                    .zipcode(request.getZipcode())
+                                    .build()
+                    )
+                    .email(request.getEmail())
+                    .password(request.getPassword())
+                    .build();
 
-        Member savedMember = memberRepository.save(newMember);
+            Member savedMember = memberRepository.save(newMember);
 
-        return MemberDto.CreateResponse.builder()
-                .name(savedMember.getName())
-                .street(savedMember.getAddress().getStreet())
-                .city(savedMember.getAddress().getCity())
-                .state(savedMember.getAddress().getState())
-                .zipcode(savedMember.getAddress().getZipcode())
-                .email(savedMember.getEmail())
-                .build();
-    }
+            return MemberDto.CreateResponse.builder()
+                    .name(savedMember.getName())
+                    .street(savedMember.getAddress().getStreet())
+                    .city(savedMember.getAddress().getCity())
+                    .state(savedMember.getAddress().getState())
+                    .zipcode(savedMember.getAddress().getZipcode())
+                    .email(savedMember.getEmail())
+                    .build();
+        }
 
-    /**
-     * 멤버 조회
-     * @param id 조회할 멤버의 아이디
-     */
+        /**
+         * 멤버 조회
+         * @param id 조회할 멤버의 아이디
+         */
     public MemberDto.FindResponse findMember(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
@@ -69,11 +70,12 @@ public class MemberService {
     /**
      * 모든 회원 조회
      */
+    @Transactional
     public List<MemberDto.FindResponse> findAllMembers() {
-        List<Member> members = memberRepository.findAll(); //모든회원조회라서 다 찾고
-        List<MemberDto.FindResponse> responses = new ArrayList<>(); // 리스트로 목록만듬
+        List<Member> members = memberRepository.findAll();
+        List<MemberDto.FindResponse> responses = new ArrayList<>();
 
-        for (Member member : members) {  // dto에 맞게 반복문을 돌려서 회원 목록을 만듬
+        for (Member member : members) {
             MemberDto.FindResponse response = MemberDto.FindResponse.builder()
                     .id(member.getId())
                     .name(member.getName())
@@ -99,14 +101,12 @@ public class MemberService {
                 .zipcode(request.getZipcode())
                 .build();
 
-        // 멤버 엔티티에서 수정 요청 처리
         member.change(
                 request.getName(),
                 request.getEmail(),
                 request.getPassword(),
                 newAddress
         );
-        // 저장
         memberRepository.save(member);
     }
 
@@ -122,4 +122,3 @@ public class MemberService {
         memberRepository.delete(member);
     }
 }
-

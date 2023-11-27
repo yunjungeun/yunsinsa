@@ -2,6 +2,7 @@ package yunsinsa.yunsinsashop.domain.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import yunsinsa.yunsinsashop.domain.model.Address;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "tb_member")
 public class Member extends BaseEntity {
 
@@ -33,7 +35,7 @@ public class Member extends BaseEntity {
     private String password;
 
     @Builder
-    public Member(String name, String email,String password, Address address){
+    public Member(String name, String email, String password, Address address){
         this.name=name;
         this.email=email;
         this.password=password;

@@ -1,4 +1,4 @@
-/*
+
 package yunsinsa.yunsinsashop.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -12,9 +12,9 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/categories")
+   /* @GetMapping("/categories")
     public void test() {
         categoryService.findAllCategory();
-    }
+    }*/
 }
-*/
+

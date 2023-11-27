@@ -15,7 +15,13 @@ spring:
 
  # Database
   datasource:
-    url: jdbc:mysql://localhost:3306/yunshinshop   #mysql포트번호/디비이름
+    url: jdbc:mysql://localhost:3306/yunshinshop
     username: yunshinshop
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Hibernate SQL Logging 설정 추가
+  logging:
+    level:
+      org.hibernate.SQL: debug
+      org.hibernate.type.descriptor.sql.BasicBinder: trace

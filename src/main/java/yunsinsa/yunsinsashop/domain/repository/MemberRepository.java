@@ -6,4 +6,5 @@ import yunsinsa.yunsinsashop.domain.entity.Member;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
 }

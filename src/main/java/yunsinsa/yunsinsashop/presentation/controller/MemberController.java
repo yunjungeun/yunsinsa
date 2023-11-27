@@ -1,6 +1,8 @@
 package yunsinsa.yunsinsashop.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import yunsinsa.yunsinsashop.domain.service.MemberService;
@@ -38,7 +40,7 @@ public class MemberController {
      */
     @GetMapping("/all")
     public List<MemberDto.FindResponse> findResponses(){
-        return memberService.findAllMembers();
+     return memberService.findAllMembers();
     }
 
     /**

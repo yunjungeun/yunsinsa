@@ -2,12 +2,14 @@ package yunsinsa.yunsinsashop.domain.model;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
+@NoArgsConstructor
 public class Address {
 
     @Column(name = "street")

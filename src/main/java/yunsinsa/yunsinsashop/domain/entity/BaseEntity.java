@@ -34,6 +34,6 @@ public class BaseEntity {
     @Column(name="updated_by")
     private String updatedBy;
 
-   @Version
-   private Long version;
+    @Version
+    private Long version;
 }
