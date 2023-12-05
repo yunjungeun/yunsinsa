@@ -20,5 +20,4 @@ public class Category extends BaseEntity {
     @OneToMany
     @JoinColumn(name = "category_id")
     private List<Product> products;
-
 }

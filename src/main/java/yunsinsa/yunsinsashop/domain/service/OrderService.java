@@ -3,7 +3,6 @@ package yunsinsa.yunsinsashop.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 import yunsinsa.yunsinsashop.domain.entity.Order;
 import yunsinsa.yunsinsashop.domain.entity.OrderDetail;
 import yunsinsa.yunsinsashop.domain.entity.OrderStatus;
@@ -16,6 +15,7 @@ import yunsinsa.yunsinsashop.presentation.dto.OrderDto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -31,9 +31,10 @@ public class OrderService {
      *
      */
     @Transactional
-    public void create(OrderDto.CreateRequest request) {
+    public OrderDto.CreateResponse create(OrderDto.CreateRequest request) {
+
         var product = productRepository.findById(request.getOrderDetail().getProductId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid ProductId"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid ProductId->상품id 없음"));
 
         // 1. 주문하려는 상품의 재고가 존재하는지 확인
         if (product.getStock() < request.getOrderDetail().getStock()) {
@@ -42,7 +43,7 @@ public class OrderService {
 
         // 2. 멤버 아이디를 찾음
         var member = memberRepository.findById(request.getMemberInfo().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid MemberId/멤버id 없음"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid MemberId->멤버id 없음"));
 
         // 3. 주문상세정보에 필요한것
         var orderDetail = OrderDetail.builder()
@@ -60,11 +61,13 @@ public class OrderService {
                 .member(member)
                 .orderAt(LocalDateTime.now())
                 .orderStatus(OrderStatus.CREATED)
-                .address(Address.builder()
-                        .city(request.getDeliveryInfo().getCity())
-                        .state(request.getDeliveryInfo().getStreet())
-                        .zipcode(request.getDeliveryInfo().getZipcode())
-                        .build().toString())
+                .address(
+                        Address.builder()
+                                .street((request.getDeliveryInfo().getStreet()))
+                                .city(request.getDeliveryInfo().getCity())
+                                .state(request.getDeliveryInfo().getState())
+                                .zipcode(request.getDeliveryInfo().getZipcode())
+                                .build())
                 .orderDetails(orderDetails)
                 .build();
 
@@ -76,6 +79,11 @@ public class OrderService {
         var savedOrder = orderRepository.save(order);
 
         paymentService.pay(savedOrder.getId());
+
+        return OrderDto.CreateResponse.builder()
+                .id(savedOrder.getId())
+                .name(savedOrder.getMember().getName())
+                .build();
     }
 
     /**
@@ -83,16 +91,46 @@ public class OrderService {
      * @param id 조회할 아이디
      */
     @Transactional(readOnly = true)
-    public Order getOrderById(Long id) {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid OrderId->id의 주문이 없음"));
+    public OrderDto.FindResponse getOrderById(Long id) {
+        Order order = orderRepository.findById(id)
+                      .orElseThrow(() -> new IllegalArgumentException("Invalid OrderId->id의 주문이 없음"));
+
+        return OrderDto.FindResponse.builder()
+                .id(order.getId())
+                .memberId(order.getMember().getId())
+                .orderAt(order.getOrderAt())
+                .address(order.getAddress())
+                .orderStatus(order.getOrderStatus())
+                .orderDetails(order.getOrderDetails().stream()
+                        .map(orderDetail -> OrderDto.OrderDetailDto.builder()
+                                .productId(orderDetail.getProduct().getId())
+                                .stock(orderDetail.getQuantity())
+                                .build())
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     /**
      * 전체주문조회
      */
     @Transactional(readOnly = true)
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<OrderDto.FindResponse> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream()
+                .map(order -> OrderDto.FindResponse.builder()
+                        .id(order.getId())
+                        .memberId(order.getMember().getId())
+                        .orderAt(order.getOrderAt())
+                        .address(order.getAddress())
+                        .orderStatus(order.getOrderStatus())
+                        .orderDetails(order.getOrderDetails().stream()
+                                .map(orderDetail -> OrderDto.OrderDetailDto.builder()
+                                        .productId(orderDetail.getProduct().getId())
+                                        .stock(orderDetail.getQuantity())
+                                        .build())
+                                .collect(Collectors.toList()))
+                        .build())
+                .collect(Collectors.toList());
     }
 }

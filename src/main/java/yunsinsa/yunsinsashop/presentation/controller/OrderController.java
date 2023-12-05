@@ -2,7 +2,6 @@ package yunsinsa.yunsinsashop.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import yunsinsa.yunsinsashop.domain.entity.Order;
 import yunsinsa.yunsinsashop.domain.entity.OrderDetail;
 import yunsinsa.yunsinsashop.domain.service.OrderDetailService;
 import yunsinsa.yunsinsashop.domain.service.OrderService;
@@ -33,7 +32,7 @@ public class OrderController {
      *
      */
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable Long id) {
+    public OrderDto.FindResponse getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
     }
 
@@ -42,7 +41,7 @@ public class OrderController {
      *
      */
     @GetMapping("/all")
-    public List<Order> getAllOrders() {
+    public List<OrderDto.FindResponse> getAllOrders() {
         return orderService.getAllOrders();
     }
 

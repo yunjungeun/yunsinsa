@@ -42,7 +42,10 @@ CREATE TABLE tb_member (
      order_id BIGINT AUTO_INCREMENT PRIMARY KEY,
      member_id BIGINT,
      order_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     address VARCHAR(255) not null,
+     street VARCHAR(100) NOT NULL,
+     city VARCHAR(100) NOT NULL,
+     state VARCHAR(50) NOT NULL,
+     zipcode INT NOT NULL,
      order_status VARCHAR(20),
      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -96,4 +99,13 @@ INSERT INTO tb_product(product_name, category_id, price, stock) VALUES('test7', 
 INSERT INTO tb_product(product_name, category_id, price, stock) VALUES('test8', 1, 1000, 100, 'system');
 INSERT INTO tb_product(product_name, category_id, price, stock) VALUES('test9', 1, 1000, 100, 'system');
 
+INSERT INTO tb_member(member_name, email, password, street, city, state, zipcode , created_by)
+VALUES("jeeun", "yunje90@naver.com", "1234" , "str10", "ct123", "sat010", 1254, "je");
+INSERT INTO tb_member(member_name, email, password, street, city, state, zipcode , created_by)
+VALUES("testje", "testmail@naver.com", "1234" , "str10", "ct123", "sat010", 1254, "je");
 
+INSERT INTO tb_order(member_id, street, city, state, zipcode , created_by)
+VALUES(1, "str10", "ct123", "sat010", 254, "je");
+
+INSERT INTO tb_order_detail(order_id, product_id, quantity, price, created_by)
+VALUES(1, 1, 2, 51000, "je");

@@ -35,7 +35,7 @@ public class ProductController {
     /**
      * 모든 상품 조회
      */
-    @GetMapping("/all") // TODO all 자체가 필요 없음
+    @GetMapping("/all")
     public List<ProductDto.FindResponse> findAllProducts() {
         return productService.findAllProducts();
     }
